@@ -1,0 +1,9 @@
+*.bak
+build*
+*.cache
+.$*
+*a.out
+*vgcore.*
+*compile_commands.json
+*.envrc
+assets
