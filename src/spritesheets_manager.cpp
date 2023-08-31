@@ -7,16 +7,13 @@ using std::vector;
 
 namespace Engine {
 
-Spritesheet::Spritesheet(const sf::Texture &txtr_) : entity{}, txtr{std::move(txtr_)} {}
-
 SpritesheetsManager::SpritesheetsManager()
     : entity{}, m_spritesheets{}, m_sprites{}, m_bound_entities{} {
   m_spritesheets.reserve(32);
 }
 
 bool SpritesheetsManager::is_valid_spritesheet_id(const Entity::Id id) const {
-  using std::ranges::any_of;
-  return any_of(m_spritesheets, [id](const Spritesheet &x) { return x.entity.id == id; });
+  return std::ranges::any_of(m_spritesheets, [id](const Texture &x) { return x.entity.id == id; });
 }
 
 bool SpritesheetsManager::is_valid_animation_state(const Entity::Id id,
@@ -76,13 +73,13 @@ optional<Entity::Id> SpritesheetsManager::add_spritesheet(const std::string &fil
   sf::Texture txtr{};
   if (not txtr.loadFromFile(filename))
     return std::nullopt;
-  m_spritesheets.emplace_back(Spritesheet(txtr));
+  m_spritesheets.emplace_back(Texture(txtr));
 
   return m_spritesheets.back().entity.id;
 }
 
 optional<vector<vector<SpriteCoordinates>>> SpritesheetsManager::split_spritesheet(
-    const Spritesheet &ss, const sf::Vector2u size) const {
+    const Texture &ss, const sf::Vector2u size) const {
   if (size.x <= 0 or size.y <= 0 or size.x > ss.txtr.getSize().x or size.y > ss.txtr.getSize().y)
     return std::nullopt;
 

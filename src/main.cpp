@@ -22,7 +22,7 @@ int main() {
     std::cout << "-> ";
     std::string input;
     std::getline(std::cin, input);
-    std::stringstream ss{ input };
+    std::stringstream ss{input};
 
     std::string cmd;
     ss >> cmd;

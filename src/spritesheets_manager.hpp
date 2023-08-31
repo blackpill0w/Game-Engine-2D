@@ -8,19 +8,11 @@
 #include <SFML/Graphics.hpp>
 
 #include "./entity.hpp"
+#include "./texture.hpp"
 
 namespace Engine {
 
 using SpriteCoordinates = sf::Rect<uint16_t>;
-
-class Spritesheet {
- public:
-  Spritesheet(const sf::Texture &txtr);
-
- public:
-  Entity entity;
-  sf::Texture txtr;
-};
 
 /**
   A class that stores all of the spritesheets, and claasifies their sprites by animation
@@ -34,8 +26,7 @@ class SpritesheetsManager {
 
   bool is_valid_animation_state(const Entity::Id id, const size_t ani_state) const;
 
-  bool is_valid_sprite(const Entity::Id id, const size_t ani_state,
-                                   const size_t idx) const;
+  bool is_valid_sprite(const Entity::Id id, const size_t ani_state, const size_t idx) const;
 
   std::optional<size_t> number_of_animation_states(const Entity::Id id) const;
 
@@ -82,10 +73,10 @@ class SpritesheetsManager {
     or is bigger than the spritesheet.
    */
   std::optional<std::vector<std::vector<SpriteCoordinates>>> split_spritesheet(
-      const Spritesheet &ss, const sf::Vector2u size) const;
+      const Texture &ss, const sf::Vector2u size) const;
 
  private:
-  std::vector<Spritesheet> m_spritesheets;
+  std::vector<Texture> m_spritesheets;
   /**
     Store sprites of a spritesheet, grouped by animation state (which is a line in the
     spritesheet).
