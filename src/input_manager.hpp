@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 #include <utility>
 
 #include <SFML/Graphics.hpp>
@@ -10,14 +11,15 @@
 
 namespace Engine {
 
-using EventCallbackPair = std::pair<AbstractEvent, Callback>;
+using EventCallbackPair = std::pair<std::unique_ptr<AbstractEvent>, Callback>;
 
 class InputManager {
  public:
   InputManager();
-  void bind(const AbstractEvent &e, Callback f);
-  void update(sf::Window& win);
-protected:
+  void bind(std::unique_ptr<AbstractEvent> e, Callback f);
+  void update(sf::Window &win);
+
+ protected:
   std::vector<EventCallbackPair> m_event_callback_pairs;
 };
 

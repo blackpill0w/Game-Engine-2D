@@ -44,7 +44,9 @@ endif()
 
 add_executable(engine-demo
   src/main.cpp
-  src/spritesheets_manager.cpp)
+  src/input_manager.cpp
+  src/spritesheets_manager.cpp
+  src/engine.cpp)
 target_link_libraries(engine-demo
    sfml-window sfml-graphics
    jsoncpp
