@@ -37,7 +37,8 @@ engine.input_manager.bind(MouseEvent{ button="right" }, [&](){
 ```
 
 # Dependenies
-- [cmake](https://cmake.org)  
+- [cmake](https://cmake.org)
+
 If you're building without [nix](https://github.com/NixOS/nix),
 cmake will try to download & compile the dependenies,
 but I am not very good with it so it might fail :)
