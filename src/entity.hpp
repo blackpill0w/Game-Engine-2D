@@ -1,6 +1,7 @@
 #pragma once
 
 namespace Engine {
+
 class Entity {
  public:
   using Id = unsigned int;
@@ -11,7 +12,8 @@ class Entity {
  public:
   Entity() : id{current_max_id++} {}
 
- private:
+ protected:
   inline static Id current_max_id = 0;
 };
+
 }  // namespace Engine

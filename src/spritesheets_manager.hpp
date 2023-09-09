@@ -46,21 +46,23 @@ class SpritesheetsManager {
     `std::nullopt` is returned if:
      - the file doesn't exist
      - the file is of invalid or unsupported type
-     - the `size` equal to or less than 0 or is bigger than the spritesheet
+     - the `sprite_size` equal to or less than 0 or is bigger than the spritesheet
   */
   std::optional<Entity::Id> load_spritesheet(const std::string &filename,
                                              const sf::Vector2u sprite_size);
   /**
      Bind a drawable entities to a spritesheet.
      # Return
-     `std::nullopt` if `id` doesn't refer to an existing spritesheet.
+     `std::nullopt` if `spritesheet_id` doesn't refer to an existing spritesheet.
+     # Warning
+     Make sure `entity_id` is valid and refers to a drawable entities.
   */
   bool bind_entity(const Entity::Id entity_id, const Entity::Id spritesheet_id);
 
  public:
   const Entity entity;
 
- private:
+ protected:
   /**
     Load a spritesheet from a file and add it to `m_spritesheets`.
   */
@@ -69,17 +71,17 @@ class SpritesheetsManager {
   /**
     Split spritesheets, a vector of sprites for each animation state.
     # Return
-    Return `std::nullopt` if the `size` equal to or less than 0
+    `std::nullopt` if the `size` equal to or less than 0
     or is bigger than the spritesheet.
    */
   std::optional<std::vector<std::vector<SpriteCoordinates>>> split_spritesheet(
       const Texture &ss, const sf::Vector2u size) const;
 
- private:
+ protected:
   std::vector<Texture> m_spritesheets;
   /**
-    Store sprites of a spritesheet, grouped by animation state (which is a line in the
-    spritesheet).
+    Store sprites of a spritesheet, grouped by animation state (which is a horizontal
+    line of sprites in the spritesheet).
   */
   std::unordered_map<Entity::Id, std::vector<std::vector<SpriteCoordinates>>> m_sprites;
   /**

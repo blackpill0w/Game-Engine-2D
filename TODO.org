@@ -1,8 +1,8 @@
 * TODO Chess Engine
-** TODO Textures & Spritesheets Manager
-** TODO Ability to pause engine
+** DONE Textures & Spritesheets Manager
+** DONE Characters
+** DONE Events (Keyboard at least)
+** TODO World
 ** TODO Notification System
-** TODO Characters
-** TODO Events (Mouse & Keyboard at least)
 ** TODO Animation
 ** TODO Gravity & Collision

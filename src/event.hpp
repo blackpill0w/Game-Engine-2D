@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>
+#include <SFML/Graphics.hpp>
 
 namespace Engine {
 
@@ -49,7 +49,7 @@ class KeyEvent : public AbstractEvent {
     return (press_event or release_event) and correct_key_are_pressed;
   }
 
- private:
+ protected:
   const Key m_key;
   const bool m_ctrl;
   const bool m_alt;
