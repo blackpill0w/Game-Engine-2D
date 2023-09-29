@@ -4,11 +4,23 @@ namespace Engine {
 
 World::World() : m_characters{} { m_characters.reserve(16); }
 
-const std::vector<Character> &World::characters() const { return m_characters; }
+const std::vector<Entity::Id> World::characters() const {
+  std::vector<Entity::Id> res{};
+  res.reserve(m_characters.size());
+  for (const auto& [id, c] : m_characters)
+    res.push_back(id);
+  return res;
+}
 
 Entity::Id World::new_character() {
-  m_characters.emplace_back(Character());
-  return m_characters.back().id;
+  Character c{};
+  const auto id = c.get_id();
+  m_characters[id] = std::move(c);
+  return id;
+}
+
+Character* World::get_character(const Entity::Id id) {
+  return m_characters.contains(id) ? &m_characters.at(id) : nullptr;
 }
 
 }  // namespace Engine

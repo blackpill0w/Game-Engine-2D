@@ -11,10 +11,11 @@ class Engine {
   Engine();
   void run();
 
-public:
+ public:
   InputManager input_manager;
   SpritesheetsManager spritesheets_manager;
-protected:
+
+ protected:
   // TODO: improve?
   sf::RenderWindow win;
 };

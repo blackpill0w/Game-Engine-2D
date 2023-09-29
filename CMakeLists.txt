@@ -46,6 +46,8 @@ add_executable(engine-demo
   src/main.cpp
   src/input_manager.cpp
   src/spritesheets_manager.cpp
+  src/world.cpp
+  src/character.cpp
   src/engine.cpp)
 target_link_libraries(engine-demo
    sfml-window sfml-graphics

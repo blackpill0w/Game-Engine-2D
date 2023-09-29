@@ -5,7 +5,7 @@
 #include "./engine.hpp"
 
 void spritesheets_manager_tests() {
-Engine::SpritesheetsManager ss_manager{};
+  Engine::SpritesheetsManager ss_manager{};
   auto print_cmds = []() {
     std::cout << "Commands\n"
               << "\th: print this"

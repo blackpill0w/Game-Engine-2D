@@ -8,16 +8,15 @@ namespace Engine {
 /*
   A class representing an `sf::Texture` as an entity.
  */
-class Texture {
+class Texture : public Entity {
  public:
   /*
     # Note:
     The class takes ownership of `txtr_`.
    */
-  Texture(const sf::Texture &txtr_) : entity{}, txtr{std::move(txtr_)} {}
+  Texture(const sf::Texture &txtr_) : Entity{}, txtr{std::move(txtr_)} {}
 
  public:
-  Entity entity;
   sf::Texture txtr;
 };
 }  // namespace Engine

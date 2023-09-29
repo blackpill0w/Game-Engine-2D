@@ -13,7 +13,7 @@ SpritesheetsManager::SpritesheetsManager()
 }
 
 bool SpritesheetsManager::is_valid_spritesheet_id(const Entity::Id id) const {
-  return std::ranges::any_of(m_spritesheets, [id](const Texture &x) { return x.entity.id == id; });
+  return std::ranges::any_of(m_spritesheets, [id](const Texture &x) { return x.get_id() == id; });
 }
 
 bool SpritesheetsManager::is_valid_animation_state(const Entity::Id id,
@@ -37,9 +37,9 @@ optional<Entity::Id> SpritesheetsManager::load_spritesheet(const std::string &fi
     m_spritesheets.pop_back();
     return std::nullopt;
   }
-  m_sprites[m_spritesheets.back().entity.id] = std::move(ss_sprites.value());
+  m_sprites[m_spritesheets.back().get_id()] = std::move(ss_sprites.value());
 
-  return m_spritesheets.back().entity.id;
+  return m_spritesheets.back().get_id();
 }
 
 bool SpritesheetsManager::bind_entity(const Entity::Id entity_id, const Entity::Id ss_id) {
@@ -75,7 +75,7 @@ optional<Entity::Id> SpritesheetsManager::add_spritesheet(const std::string &fil
     return std::nullopt;
   m_spritesheets.emplace_back(Texture(txtr));
 
-  return m_spritesheets.back().entity.id;
+  return m_spritesheets.back().get_id();
 }
 
 optional<vector<vector<SpriteCoordinates>>> SpritesheetsManager::split_spritesheet(

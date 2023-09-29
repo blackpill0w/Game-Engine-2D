@@ -14,6 +14,7 @@ sh_id2 = engine.spritesheet_manager.load_spritesheet('/path/to/file2.png', (64, 
 
 player_id = engine.world_manager.new_character();
 // Make spritesheet active for an entity
+// The first sprite in spritesheet is used by default (the one located at (0, 0))
 engine.spritesheet_manager.bind_spritesheet(player_id, sh_id1);
 
 // These depend on how your spritesheet is organised.
@@ -31,7 +32,7 @@ engine.event_manager.bind(KeyEvent(key='p'), [&]() {
   // code for drawing a pause menu;
 });
 
-engine.input_manager.bind(MouseEvent{ button="right" }, [&](){
+engine.input_manager.bind(MouseEvent{button="right"}, [&](){
 	engine.pause();
 });
 ```
