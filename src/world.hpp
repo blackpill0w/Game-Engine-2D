@@ -15,6 +15,7 @@ class World {
     Create a new character and return its id.
   */
   Entity::Id new_character();
+  bool is_valid_entity(Entity::Id id) const;
   /**
     Return `nullptr` if the character doesn't exist.
   */

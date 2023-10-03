@@ -1,8 +1,8 @@
-* TODO Chess Engine
+* TODO Game Engine
 ** DONE Textures & Spritesheets Manager
 ** DONE Characters
 ** DONE Events (Keyboard at least)
-** TODO World
-** TODO Notification System
+** DONE World
 ** TODO Animation
+** TODO Notification System
 ** TODO Gravity & Collision

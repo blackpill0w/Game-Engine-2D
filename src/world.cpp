@@ -2,7 +2,7 @@
 
 namespace Engine {
 
-World::World() : m_characters{} { m_characters.reserve(16); }
+World::World() : m_characters{} { m_characters.reserve(32); }
 
 const std::vector<Entity::Id> World::characters() const {
   std::vector<Entity::Id> res{};
@@ -17,6 +17,10 @@ Entity::Id World::new_character() {
   const auto id = c.get_id();
   m_characters[id] = std::move(c);
   return id;
+}
+
+bool World::is_valid_entity(const Entity::Id id) const {
+  return m_characters.contains(id);
 }
 
 Character* World::get_character(const Entity::Id id) {

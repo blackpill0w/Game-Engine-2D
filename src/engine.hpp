@@ -4,6 +4,7 @@
 
 #include "./spritesheets_manager.hpp"
 #include "./input_manager.hpp"
+#include "./world.hpp"
 
 namespace Engine {
 class Engine {
@@ -14,6 +15,7 @@ class Engine {
  public:
   InputManager input_manager;
   SpritesheetsManager spritesheets_manager;
+  World world;
 
  protected:
   // TODO: improve?

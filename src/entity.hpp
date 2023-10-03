@@ -10,8 +10,11 @@ class Entity {
   Entity() : m_id{current_max_id++} {}
   Entity::Id get_id() const { return m_id; };
 
+ public:
+  static constexpr Id InvalidId = 0;
+
  protected:
-  inline static Id current_max_id = 0;
+  inline static Id current_max_id = 1;
   Id m_id;
 };
 

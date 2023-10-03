@@ -8,7 +8,7 @@ using std::vector;
 namespace Engine {
 
 SpritesheetsManager::SpritesheetsManager()
-    : entity{}, m_spritesheets{}, m_sprites{}, m_bound_entities{} {
+    : entity{}, m_spritesheets{}, m_sprites{} {
   m_spritesheets.reserve(32);
 }
 
@@ -18,7 +18,7 @@ bool SpritesheetsManager::is_valid_spritesheet_id(const Entity::Id id) const {
 
 bool SpritesheetsManager::is_valid_animation_state(const Entity::Id id,
                                                    const size_t ani_state) const {
-  optional<size_t> ani_state_num = number_of_animation_states(id);
+  optional<size_t> ani_state_num = animation_states_num(id);
   return ani_state_num.has_value() and ani_state < ani_state_num;
 }
 
@@ -42,20 +42,13 @@ optional<Entity::Id> SpritesheetsManager::load_spritesheet(const std::string &fi
   return m_spritesheets.back().get_id();
 }
 
-bool SpritesheetsManager::bind_entity(const Entity::Id entity_id, const Entity::Id ss_id) {
-  if (not is_valid_spritesheet_id(ss_id))
-    return false;
-  m_bound_entities[ss_id].push_back(entity_id);
-  return true;
-}
-
-optional<size_t> SpritesheetsManager::number_of_animation_states(const Entity::Id id) const {
+optional<size_t> SpritesheetsManager::animation_states_num(const Entity::Id id) const {
   if (not is_valid_spritesheet_id(id))
     return std::nullopt;
   return m_sprites.at(id).size();
 }
 
-optional<size_t> SpritesheetsManager::animation_state_sprites_number(const Entity::Id id,
+optional<size_t> SpritesheetsManager::animation_state_sprites_num(const Entity::Id id,
                                                                      const size_t ani_state) const {
   if (not is_valid_animation_state(id, ani_state))
     return std::nullopt;

@@ -28,10 +28,19 @@ class SpritesheetsManager {
 
   bool is_valid_sprite(const Entity::Id id, const size_t ani_state, const size_t idx) const;
 
-  std::optional<size_t> number_of_animation_states(const Entity::Id id) const;
+  /**
+    Get the number of animation states.
+    @param `id` id of the spritesheet
+  */
+  std::optional<size_t> animation_states_num(const Entity::Id id) const;
 
-  std::optional<size_t> animation_state_sprites_number(const Entity::Id id,
-                                                       const size_t ani_state) const;
+  /**
+    Get the number of sprites of an animation state.
+    @param `id` id of the spritesheet
+    @param `ani_state` number of the animation state
+  */
+  std::optional<size_t> animation_state_sprites_num(const Entity::Id id,
+                                                    const size_t ani_state) const;
 
   std::optional<SpriteCoordinates> get_sprite_coordinates(const Entity::Id id,
                                                           const size_t ani_state,
@@ -43,21 +52,13 @@ class SpritesheetsManager {
     Each line in the spritesheet defines a separate state (Idle, Walk...) which are
     just unsigned ints starting from 0.
     # Return
-    `std::nullopt` is returned if:
+    `std::nullopt` if:
      - the file doesn't exist
      - the file is of invalid or unsupported type
      - the `sprite_size` equal to or less than 0 or is bigger than the spritesheet
   */
   std::optional<Entity::Id> load_spritesheet(const std::string &filename,
                                              const sf::Vector2u sprite_size);
-  /**
-     Bind a drawable entities to a spritesheet.
-     # Return
-     `std::nullopt` if `spritesheet_id` doesn't refer to an existing spritesheet.
-     # Warning
-     Make sure `entity_id` is valid and refers to a drawable entities.
-  */
-  bool bind_entity(const Entity::Id entity_id, const Entity::Id spritesheet_id);
 
  public:
   const Entity entity;
@@ -71,8 +72,7 @@ class SpritesheetsManager {
   /**
     Split spritesheets, a vector of sprites for each animation state.
     # Return
-    `std::nullopt` if the `size` equal to or less than 0
-    or is bigger than the spritesheet.
+    `std::nullopt` if the `size` <= 0 or > than the spritesheet.
    */
   std::optional<std::vector<std::vector<SpriteCoordinates>>> split_spritesheet(
       const Texture &ss, const sf::Vector2u size) const;
@@ -84,9 +84,5 @@ class SpritesheetsManager {
     line of sprites in the spritesheet).
   */
   std::unordered_map<Entity::Id, std::vector<std::vector<SpriteCoordinates>>> m_sprites;
-  /**
-     Store drawable entities and spritesheets pairs.
-   */
-  std::unordered_map<Entity::Id, std::vector<Entity::Id>> m_bound_entities;
 };
 }  // namespace Engine
