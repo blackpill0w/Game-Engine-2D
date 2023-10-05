@@ -38,7 +38,7 @@ engine.input_manager.bind(MouseEvent{button="right"}, [&](){
 ```
 
 # Build
-Build using (Conan)[https://conan.io/] and CMake(https://cmake.org).
+Build using [Conan](https://conan.io/) and [CMake](https://cmake.org).
 
 If it doesn't work, make sure you have these libraries installed:
 - [SFML](https://sfml-dev.org)
