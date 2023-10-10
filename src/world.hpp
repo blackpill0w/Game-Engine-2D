@@ -19,7 +19,7 @@ class World {
   /**
     Return `nullptr` if the character doesn't exist.
   */
-  Character* get_character(const Entity::Id id);
+  Character *get_character(const Entity::Id id);
 
  protected:
   std::unordered_map<Entity::Id, Character> m_characters;

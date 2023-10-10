@@ -1,5 +1,7 @@
 #include "./spritesheets_manager.hpp"
 
+#include <iostream>
+#include <algorithm>
 #include <ranges>
 
 using std::optional;
@@ -7,8 +9,7 @@ using std::vector;
 
 namespace Engine {
 
-SpritesheetsManager::SpritesheetsManager()
-    : entity{}, m_spritesheets{}, m_sprites{} {
+SpritesheetsManager::SpritesheetsManager() : entity{}, m_spritesheets{}, m_sprites{} {
   m_spritesheets.reserve(32);
 }
 
@@ -27,44 +28,48 @@ bool SpritesheetsManager::is_valid_sprite(const Entity::Id id, const size_t ani_
   return is_valid_animation_state(id, ani_state) and idx < m_sprites.at(id).at(ani_state).size();
 }
 
+const Texture *SpritesheetsManager::get_spritesheet(const Entity::Id id) const {
+  return is_valid_spritesheet_id(id) ? nullptr : &m_spritesheets[id];
+}
+
 optional<Entity::Id> SpritesheetsManager::load_spritesheet(const std::string &filename,
                                                            const sf::Vector2u sprite_size) {
-  if (not add_spritesheet(filename).has_value())
+  if (! add_spritesheet(filename).has_value())
     return std::nullopt;
 
   auto ss_sprites = split_spritesheet(m_spritesheets.back(), sprite_size);
-  if (not ss_sprites.has_value()) {
+  if (! ss_sprites.has_value()) {
     m_spritesheets.pop_back();
     return std::nullopt;
   }
-  m_sprites[m_spritesheets.back().get_id()] = std::move(ss_sprites.value());
+  m_sprites.emplace(m_spritesheets.back().get_id(), std::move(*ss_sprites));
 
   return m_spritesheets.back().get_id();
 }
 
 optional<size_t> SpritesheetsManager::animation_states_num(const Entity::Id id) const {
-  if (not is_valid_spritesheet_id(id))
+  if (! is_valid_spritesheet_id(id))
     return std::nullopt;
   return m_sprites.at(id).size();
 }
 
 optional<size_t> SpritesheetsManager::animation_state_sprites_num(const Entity::Id id,
-                                                                     const size_t ani_state) const {
-  if (not is_valid_animation_state(id, ani_state))
+                                                                  const size_t ani_state) const {
+  if (! is_valid_animation_state(id, ani_state))
     return std::nullopt;
   return m_sprites.at(id).at(ani_state).size();
 }
 
 std::optional<SpriteCoordinates> SpritesheetsManager::get_sprite_coordinates(
     const Entity::Id id, const size_t ani_state, const size_t idx) const {
-  if (not is_valid_spritesheet_id(id))
+  if (! is_valid_spritesheet_id(id))
     return std::nullopt;
   return m_sprites.at(id).at(ani_state).at(idx);
 }
 
 optional<Entity::Id> SpritesheetsManager::add_spritesheet(const std::string &filename) {
   sf::Texture txtr{};
-  if (not txtr.loadFromFile(filename))
+  if (! txtr.loadFromFile(filename))
     return std::nullopt;
   m_spritesheets.emplace_back(Texture(txtr));
 
@@ -73,16 +78,17 @@ optional<Entity::Id> SpritesheetsManager::add_spritesheet(const std::string &fil
 
 optional<vector<vector<SpriteCoordinates>>> SpritesheetsManager::split_spritesheet(
     const Texture &ss, const sf::Vector2u size) const {
-  if (size.x <= 0 or size.y <= 0 or size.x > ss.txtr.getSize().x or size.y > ss.txtr.getSize().y)
+  if (size.x > ss.txtr.getSize().x || size.y > ss.txtr.getSize().y)
     return std::nullopt;
 
   vector<vector<SpriteCoordinates>> res{};
   res.reserve(32);
-  for (unsigned y = 0; y < ss.txtr.getSize().y; y += size.y) {
+  for (size_t y = 0; y < ss.txtr.getSize().y; y += size.y) {
     res.emplace_back();
-    res.back().reserve(ss.txtr.getSize().x);
-    for (unsigned x = 0; x < ss.txtr.getSize().x; x += size.x)
+    res.back().reserve(size_t(ss.txtr.getSize().x / size.x));
+    for (size_t x = 0; x < ss.txtr.getSize().x; x += size.x) {
       res.back().emplace_back(SpriteCoordinates(x, y, size.x, size.y));
+    }
   }
   return res;
 }

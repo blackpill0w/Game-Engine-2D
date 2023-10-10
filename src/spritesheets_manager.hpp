@@ -12,7 +12,7 @@
 
 namespace Engine {
 
-using SpriteCoordinates = sf::Rect<uint16_t>;
+using SpriteCoordinates = sf::Rect<size_t>;
 
 /**
   A class that stores all of the spritesheets, and claasifies their sprites by animation
@@ -27,6 +27,8 @@ class SpritesheetsManager {
   bool is_valid_animation_state(const Entity::Id id, const size_t ani_state) const;
 
   bool is_valid_sprite(const Entity::Id id, const size_t ani_state, const size_t idx) const;
+
+  const Texture *get_spritesheet(const Entity::Id id) const;
 
   /**
     Get the number of animation states.

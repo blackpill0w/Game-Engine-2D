@@ -2,16 +2,14 @@
   // Use IntelliSense to learn about possible attributes.
   // Hover to view descriptions of existing attributes.
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-  "version": "0.2.0",
-  "logging": { "engineLogging": true, "trace": true, "traceResponse": true },
   "configurations": [
     {
       "type": "lldb",
       "request": "launch",
       "name": "Debug",
-      "program": "${workspaceFolder}/build/engine-demo",
+      "program": "${workspaceFolder}/build_debug/engine-demo",
       "args": [],
-      "cwd": "${workspaceFolder}/build",
+      "cwd": "${workspaceFolder}/build_debug",
     }
   ]
 }

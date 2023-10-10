@@ -10,6 +10,7 @@ class AbstractEvent {
  public:
   AbstractEvent(const EventType et) : m_type{et} {}
   virtual bool equals_sfml_event([[maybe_unused]] const sf::Event &e) const = 0;
+  virtual ~AbstractEvent()                                                  = default;
 
  protected:
   const EventType m_type;
