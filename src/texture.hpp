@@ -14,9 +14,19 @@ class Texture : public Entity {
     # Note:
     The class takes ownership of `txtr_`.
    */
-  Texture(const sf::Texture &txtr_) : Entity{}, txtr{std::move(txtr_)} {}
+  Texture(const std::string &filename) : Entity{}, txtr{} { load_from_file(filename); }
+  bool has_texture() const { return m_has_texture; }
+  bool load_from_file(const std::string &filename) {
+    if (txtr.loadFromFile(filename)) {
+      m_has_texture = true;
+    }
+    return m_has_texture;
+  }
 
  public:
   sf::Texture txtr;
+
+ protected:
+  bool m_has_texture = false;
 };
 }  // namespace Engine

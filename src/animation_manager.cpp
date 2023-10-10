@@ -19,12 +19,12 @@ bool AnimationManager::bind_entity(const Entity::Id id, const Entity::Id ss_id) 
     m_anim_data[id] = AnimationData{};
   }
   m_anim_data[id].spritesheet_id = ss_id;
+  m_anim_data[id].ani_state = 2;
+  m_anim_data[id].sprite_num = 2;
   // TODO: move this to the rendering engine
-  m_parent->world.get_character(id)->sprite.setTexture(
-      m_parent->spritesheets_manager.get_spritesheet(id)->txtr);
+  //m_parent->world.get_character(id)->sprite.setTexture(
+  //    m_parent->spritesheets_manager.get_spritesheet(id)->txtr);
 
-  m_anim_data[id].sprite_num = 0;
-  m_anim_data[id].sprite_num = 0;
   return true;
 }
 
@@ -62,6 +62,7 @@ void AnimationManager::update() {
       anim_data.sprite_num = 0.f;
     }
     // TODO: move this to the rendering engine
+    const auto* ss = m_parent->spritesheets_manager.get_spritesheet(anim_data.spritesheet_id);
     const auto ss_coords = m_parent->spritesheets_manager.get_sprite_coordinates(
         anim_data.spritesheet_id, anim_data.ani_state, std::size_t(anim_data.sprite_num));
     assert(ss_coords.has_value());
@@ -69,6 +70,7 @@ void AnimationManager::update() {
     // TODO: get rid of this conversion
     const sf::IntRect coords{int(ss_coords->left), int(ss_coords->top), int(ss_coords->width),
                              int(ss_coords->height)};
+    m_parent->world.get_character(id)->sprite.setTexture(ss->txtr);
     m_parent->world.get_character(id)->sprite.setTextureRect(coords);
   }
 }

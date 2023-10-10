@@ -11,6 +11,7 @@ Engine::Engine()
 }
 
 void Engine::run() {
+  win.setFramerateLimit(60);
   while (win.isOpen()) {
     input_manager.update(win);
     animation_manager.update();

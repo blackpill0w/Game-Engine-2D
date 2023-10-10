@@ -29,7 +29,11 @@ bool SpritesheetsManager::is_valid_sprite(const Entity::Id id, const size_t ani_
 }
 
 const Texture *SpritesheetsManager::get_spritesheet(const Entity::Id id) const {
-  return is_valid_spritesheet_id(id) ? nullptr : &m_spritesheets[id];
+  if (! is_valid_spritesheet_id(id))
+    return nullptr;
+  const auto ss = std::ranges::find_if(m_spritesheets,
+                                        [&](const Texture &txtr) { return txtr.get_id() == id; });
+  return &(*ss);
 }
 
 optional<Entity::Id> SpritesheetsManager::load_spritesheet(const std::string &filename,
@@ -68,10 +72,10 @@ std::optional<SpriteCoordinates> SpritesheetsManager::get_sprite_coordinates(
 }
 
 optional<Entity::Id> SpritesheetsManager::add_spritesheet(const std::string &filename) {
-  sf::Texture txtr{};
-  if (! txtr.loadFromFile(filename))
+  Texture txtr{filename};
+  if (! txtr.has_texture())
     return std::nullopt;
-  m_spritesheets.emplace_back(Texture(txtr));
+  m_spritesheets.emplace_back(std::move(txtr));
 
   return m_spritesheets.back().get_id();
 }
