@@ -1,9 +1,0 @@
-{
-    "version": 4,
-    "vendor": {
-        "conan": {}
-    },
-    "include": [
-        "/home/blackpill0w/Code/c_c++/Game-Engine-2D/build_debug/CMakePresets.json"
-    ]
-}
