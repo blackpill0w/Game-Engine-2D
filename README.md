@@ -8,14 +8,15 @@ A 2D game engine in C++20.
  Load spritesheet, each one has pictures of the same size.
  Each line in the spritesheet defines a state (Idle, Walk...) which are just ints
  starting from 0.
+ (64, 64) is the size of each sprite.
 */
-sh_id1 = engine.spritesheet_manager.load_spritesheet('/path/to/file1.png', (64, 64));
-sh_id2 = engine.spritesheet_manager.load_spritesheet('/path/to/file2.png', (64, 64));
+ss_id1 = engine.spritesheet_manager.load_spritesheet('/path/to/file1.png', (64, 64));
+ss_id2 = engine.spritesheet_manager.load_spritesheet('/path/to/file2.png', (64, 64));
 
 player_id = engine.world_manager.new_character();
 // Make spritesheet active for an entity
 // The first sprite in spritesheet is used by default (the one located at (0, 0))
-engine.spritesheet_manager.bind_spritesheet(player_id, sh_id1);
+engine.spritesheet_manager.bind_spritesheet(player_id, ss_id1);
 
 // These depend on how your spritesheet is organised.
 enum class PlayerAnimationState {
