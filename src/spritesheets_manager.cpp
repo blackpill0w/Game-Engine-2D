@@ -64,7 +64,7 @@ optional<size_t> SpritesheetsManager::animation_state_sprites_num(const Entity::
   return m_sprites.at(id).at(ani_state).size();
 }
 
-std::optional<SpriteCoordinates> SpritesheetsManager::get_sprite_coordinates(
+optional<SpriteCoordinates> SpritesheetsManager::get_sprite_coordinates(
     const Entity::Id id, const size_t ani_state, const size_t idx) const {
   if (! is_valid_spritesheet_id(id))
     return std::nullopt;

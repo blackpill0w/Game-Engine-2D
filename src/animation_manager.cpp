@@ -44,10 +44,7 @@ bool AnimationManager::set_animation_state(const Entity::Id id, const std::size_
   if (not ss_coords) {
     return false;
   }
-  // TODO: get rid of this conversion
-  const sf::IntRect coords{int(ss_coords->left), int(ss_coords->top), int(ss_coords->width),
-                           int(ss_coords->height)};
-  m_parent->world.get_character(id)->sprite.setTextureRect(coords);
+  m_parent->world.get_character(id)->sprite.setTextureRect(sf::IntRect(*ss_coords));
 
   return true;
 }
@@ -62,7 +59,7 @@ void AnimationManager::update() {
       anim_data.sprite_num = 0.f;
     }
     // TODO: move this to the rendering engine
-    const auto* ss = m_parent->spritesheets_manager.get_spritesheet(anim_data.spritesheet_id);
+    const Texture * ss = m_parent->spritesheets_manager.get_spritesheet(anim_data.spritesheet_id);
     const auto ss_coords = m_parent->spritesheets_manager.get_sprite_coordinates(
         anim_data.spritesheet_id, anim_data.ani_state, std::size_t(anim_data.sprite_num));
     assert(ss_coords.has_value());
