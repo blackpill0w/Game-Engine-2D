@@ -3,6 +3,7 @@
 ** DONE Characters
 ** DONE Events (Keyboard at least)
 ** DONE World
-** TODO Animation
+** DONE Animation
+** TODO Gravity
 ** TODO Notification System
-** TODO Gravity & Collision
+** TODO Collision

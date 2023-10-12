@@ -8,3 +8,5 @@ build*
 *.envrc
 assets
 *CMakeUserPresets.json
+#*
+*~
