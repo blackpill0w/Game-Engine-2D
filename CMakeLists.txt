@@ -19,7 +19,7 @@ add_subdirectory(deps/SFML-2.6.1)
 set(JSONCPP_WITH_POST_BUILD_UNITTEST OFF)
 set(JSONCPP_WITH_POST_BUILD_UNITTEST OFF)
 set(JSONCPP_WITH_TESTS OFF)
-add_subdirectory(deps/jsoncpp)
+#add_subdirectory(deps/jsoncpp)
 
 add_executable(engine-demo
   src/character.cpp

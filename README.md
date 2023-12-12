@@ -39,8 +39,8 @@ engine.input_manager.bind(MouseEvent{button="right"}, [&](){
 ```
 
 # Build
-Build using [Conan](https://conan.io/) and [CMake](https://cmake.org).
+Build using [CMake](https://cmake.org).
 
-If it doesn't work, make sure you have these libraries installed:
+If it doesn't work, install the following libraries:
 - [SFML](https://sfml-dev.org)
 - [JsonCpp](https://github.com/open-source-parsers/jsoncpp)
