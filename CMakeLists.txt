@@ -5,12 +5,14 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 string(CONCAT CMAKE_CXX_FLAGS
               "${CMAKE_CXX_FLAGS}"
-              " -Wall -Wextra"
+              " -static -Wall -Wextra"
               " -Wfloat-conversion -Wsign-conversion"
               " -Wshadow -Wduplicated-cond"
               " -Wduplicated-branches -Wlogical-op"
               " -Wnull-dereference -Wuseless-cast"
               " -Wformat=2")
+
+set(BUILD_SHARED_LIBS OFF)
 
 # SFML
 add_subdirectory(deps/SFML-2.6.1)
