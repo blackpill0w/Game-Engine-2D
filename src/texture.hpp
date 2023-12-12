@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "./entity.hpp"
 
-namespace Engine {
+namespace e2d {
 
 /*
   A class representing an `sf::Texture` as an entity.
@@ -29,4 +29,4 @@ class Texture : public Entity {
  protected:
   bool m_has_texture = false;
 };
-}  // namespace Engine
+}  // namespace e2d

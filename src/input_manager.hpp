@@ -9,7 +9,7 @@
 #include "./utils.hpp"
 #include "./event.hpp"
 
-namespace Engine {
+namespace e2d {
 
 using EventCallbackPair = std::pair<std::unique_ptr<AbstractEvent>, Callback>;
 
@@ -23,4 +23,4 @@ class InputManager {
   std::vector<EventCallbackPair> m_event_callback_pairs;
 };
 
-}  // namespace Engine
+}  // namespace e2d

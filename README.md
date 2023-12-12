@@ -1,8 +1,8 @@
-# Game-Engine-2D
-A 2D game engine in C++20.
+# e2d
+An *Engine of 2 Dimensions* (a 2D game engine) in C++20.
 
 ## Interface
-
+This is probably how the engine is meant to be used:
 ```c++
 /*
  Load spritesheet, each one has pictures of the same size.

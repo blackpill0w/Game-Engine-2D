@@ -7,7 +7,7 @@
 using std::optional;
 using std::vector;
 
-namespace Engine {
+namespace e2d {
 
 SpritesheetsManager::SpritesheetsManager() : entity{}, m_spritesheets{}, m_sprites{} {
   m_spritesheets.reserve(32);
@@ -32,7 +32,7 @@ const Texture *SpritesheetsManager::get_spritesheet(const Entity::Id id) const {
   if (! is_valid_spritesheet_id(id))
     return nullptr;
   const auto ss = std::ranges::find_if(m_spritesheets,
-                                        [&](const Texture &txtr) { return txtr.get_id() == id; });
+                                       [&](const Texture &txtr) { return txtr.get_id() == id; });
   return &(*ss);
 }
 
@@ -64,8 +64,9 @@ optional<size_t> SpritesheetsManager::animation_state_sprites_num(const Entity::
   return m_sprites.at(id).at(ani_state).size();
 }
 
-optional<SpriteCoordinates> SpritesheetsManager::get_sprite_coordinates(
-    const Entity::Id id, const size_t ani_state, const size_t idx) const {
+optional<SpriteCoordinates> SpritesheetsManager::get_sprite_coordinates(const Entity::Id id,
+                                                                        const size_t ani_state,
+                                                                        const size_t idx) const {
   if (! is_valid_spritesheet_id(id))
     return std::nullopt;
   return m_sprites.at(id).at(ani_state).at(idx);
@@ -97,4 +98,4 @@ optional<vector<vector<SpriteCoordinates>>> SpritesheetsManager::split_spriteshe
   return res;
 }
 
-}  // namespace Engine
+}  // namespace e2d

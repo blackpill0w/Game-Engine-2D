@@ -10,7 +10,7 @@
 #include "./entity.hpp"
 #include "./texture.hpp"
 
-namespace Engine {
+namespace e2d {
 
 using SpriteCoordinates = sf::Rect<size_t>;
 
@@ -87,4 +87,4 @@ class SpritesheetsManager {
   */
   std::unordered_map<Entity::Id, std::vector<std::vector<SpriteCoordinates>>> m_sprites;
 };
-}  // namespace Engine
+}  // namespace e2d

@@ -1,6 +1,7 @@
 #include "./engine.hpp"
 
-namespace Engine {
+namespace e2d {
+
 Engine::Engine()
     : input_manager{},
       spritesheets_manager{},
@@ -26,4 +27,4 @@ void Engine::run() {
   }
 }
 
-}  // namespace Engine
+}  // namespace e2d

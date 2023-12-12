@@ -4,7 +4,7 @@
 
 #include "./engine.hpp"
 
-namespace Engine {
+namespace e2d {
 AnimationManager::AnimationManager(Engine *parent) : m_parent{parent} {
   assert(m_parent != nullptr);
   m_anim_data.reserve(32);
@@ -19,10 +19,10 @@ bool AnimationManager::bind_entity(const Entity::Id id, const Entity::Id ss_id) 
     m_anim_data[id] = AnimationData{};
   }
   m_anim_data[id].spritesheet_id = ss_id;
-  m_anim_data[id].ani_state = 2;
-  m_anim_data[id].sprite_num = 2;
+  m_anim_data[id].ani_state      = 2;
+  m_anim_data[id].sprite_num     = 2;
   // TODO: move this to the rendering engine
-  //m_parent->world.get_character(id)->sprite.setTexture(
+  // m_parent->world.get_character(id)->sprite.setTexture(
   //    m_parent->spritesheets_manager.get_spritesheet(id)->txtr);
 
   return true;
@@ -59,7 +59,7 @@ void AnimationManager::update() {
       anim_data.sprite_num = 0.f;
     }
     // TODO: move this to the rendering engine
-    const Texture * ss = m_parent->spritesheets_manager.get_spritesheet(anim_data.spritesheet_id);
+    const Texture *ss    = m_parent->spritesheets_manager.get_spritesheet(anim_data.spritesheet_id);
     const auto ss_coords = m_parent->spritesheets_manager.get_sprite_coordinates(
         anim_data.spritesheet_id, anim_data.ani_state, std::size_t(anim_data.sprite_num));
     assert(ss_coords.has_value());
@@ -71,4 +71,4 @@ void AnimationManager::update() {
     m_parent->world.get_character(id)->sprite.setTextureRect(coords);
   }
 }
-}  // namespace Engine
+}  // namespace e2d

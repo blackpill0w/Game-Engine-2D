@@ -5,7 +5,7 @@
 
 #include "./entity.hpp"
 
-namespace Engine {
+namespace e2d {
 
 class Engine;
 
@@ -37,4 +37,4 @@ class AnimationManager {
   std::unordered_map<Entity::Id, AnimationData> m_anim_data;
   Engine *m_parent;
 };
-}  // namespace Engine
+}  // namespace e2d

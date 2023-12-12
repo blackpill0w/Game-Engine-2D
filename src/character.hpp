@@ -4,7 +4,7 @@
 
 #include "./entity.hpp"
 
-namespace Engine {
+namespace e2d {
 
 class Character : public Entity {
  public:
@@ -19,4 +19,4 @@ class Character : public Entity {
   sf::Sprite sprite;
 };
 
-}  // namespace Engine
+}  // namespace e2d

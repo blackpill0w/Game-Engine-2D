@@ -1,6 +1,6 @@
 #include "./character.hpp"
 
-namespace Engine {
+namespace e2d {
 
 Character::Character() : Entity{}, sprite{} {}
 
@@ -10,4 +10,4 @@ void Character::move(const float x_offset, const float y_offset) {
   sprite.move(x_offset, y_offset);
 }
 
-}  // namespace Engine
+}  // namespace e2d

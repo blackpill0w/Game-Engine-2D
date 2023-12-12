@@ -2,9 +2,9 @@
 #include "./engine.hpp"
 
 int main() {
-  Engine::Engine engine{};
+  e2d::Engine engine{};
   engine.input_manager.bind(
-      std::make_unique<Engine::KeyEvent>(Engine::EventType::KeyPress, Engine::KeyEvent::Key::K),
+      std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyPress, e2d::KeyEvent::Key::K),
       [&] {
         std::cout << "Hello, Mr. K\n";
         std::cout.flush();
@@ -16,11 +16,14 @@ int main() {
     exit(1);
   }
   engine.animation_manager.bind_entity(laura_id, *laura_ss_id);
-  engine.animation_manager.set_animation_state(laura_id, 3);
+  engine.animation_manager.set_animation_state(laura_id, 1);
 
   engine.input_manager.bind(
-      std::make_unique<Engine::KeyEvent>(Engine::EventType::KeyPress, Engine::KeyEvent::Key::Right),
-      [&] { engine.world.get_character(laura_id)->move(5.f, 0.f); });
+      std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyPress, e2d::KeyEvent::Key::Right),
+      [&] {
+        engine.animation_manager.set_animation_state(laura_id, 3);
+        engine.world.get_character(laura_id)->move(5.f, 0.f);
+      });
 
   engine.run();
 }

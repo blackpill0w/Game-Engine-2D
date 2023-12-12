@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-namespace Engine {
+namespace e2d {
 
 enum class EventType { Other, CloseWindow, KeyPress, KeyRelease };
 
@@ -57,4 +57,4 @@ class KeyEvent : public AbstractEvent {
   const bool m_shift;
 };
 
-}  // namespace Engine
+}  // namespace e2d

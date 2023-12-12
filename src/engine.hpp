@@ -7,7 +7,7 @@
 #include "./world.hpp"
 #include "./animation_manager.hpp"
 
-namespace Engine {
+namespace e2d {
 class Engine {
  public:
   /**
@@ -26,4 +26,4 @@ class Engine {
  protected:
   sf::RenderWindow win;
 };
-}  // namespace Engine
+}  // namespace e2d

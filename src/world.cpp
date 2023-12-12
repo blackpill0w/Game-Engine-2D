@@ -1,6 +1,6 @@
 #include "./world.hpp"
 
-namespace Engine {
+namespace e2d {
 
 World::World() : m_characters{} { m_characters.reserve(32); }
 
@@ -25,4 +25,4 @@ Character *World::get_character(const Entity::Id id) {
   return m_characters.contains(id) ? &m_characters.at(id) : nullptr;
 }
 
-}  // namespace Engine
+}  // namespace e2d

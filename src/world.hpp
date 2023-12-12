@@ -5,7 +5,7 @@
 
 #include "./character.hpp"
 
-namespace Engine {
+namespace e2d {
 
 class World {
  public:
@@ -25,4 +25,4 @@ class World {
   std::unordered_map<Entity::Id, Character> m_characters;
 };
 
-}  // namespace Engine
+}  // namespace e2d

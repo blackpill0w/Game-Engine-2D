@@ -2,7 +2,7 @@
 
 #include <functional>
 
-namespace Engine {
+namespace e2d {
 
 using Callback = std::function<void()>;
 

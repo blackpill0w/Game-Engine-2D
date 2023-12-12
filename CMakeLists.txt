@@ -13,32 +13,13 @@ string(CONCAT CMAKE_CXX_FLAGS
               " -Wformat=2")
 
 # SFML
-find_package(SFML REQUIRED COMPONENTS window graphics)
-#if (NOT SFML_FOUND)
-# include(FetchContent)
-# FetchContent_Declare(
-#   SFML
-#   GIT_REPOSITORY https://github.com/SFML/SFML.git
-#   GIT_TAG 2.5.1
-# )
-# FetchContent_MakeAvailable(SFML)
-#endif()
+add_subdirectory(deps/SFML-2.6.1)
 
 # JsonCpp
 set(JSONCPP_WITH_POST_BUILD_UNITTEST OFF)
 set(JSONCPP_WITH_POST_BUILD_UNITTEST OFF)
 set(JSONCPP_WITH_TESTS OFF)
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(JSONCPP jsoncpp)
-#if (NOT JSONCPP_FOUND)
-# include(FetchContent)
-# FetchContent_Declare(
-#   JSONCPP
-#   GIT_REPOSITORY https://github.com/open-source-parsers/jsoncpp.git
-#   GIT_TAG 1.9.5
-# )
-# FetchContent_MakeAvailable(JSONCPP)
-#endif()
+add_subdirectory(deps/jsoncpp)
 
 add_executable(engine-demo
   src/character.cpp

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Engine {
+namespace e2d {
 
 class Entity {
  public:
@@ -18,4 +18,4 @@ class Entity {
   Id m_id;
 };
 
-}  // namespace Engine
+}  // namespace e2d

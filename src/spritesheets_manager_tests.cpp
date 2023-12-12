@@ -5,7 +5,7 @@
 #include "./engine.hpp"
 
 void spritesheets_manager_tests() {
-  Engine::SpritesheetsManager ss_manager{};
+  e2d::SpritesheetsManager ss_manager{};
   auto print_cmds = []() {
     std::cout << "Commands\n"
               << "\th: print this"
@@ -33,7 +33,7 @@ void spritesheets_manager_tests() {
     else if (cmd == "lss") {
       std::string filepath;
       ss >> filepath;
-      std::optional<Engine::Entity::Id> i = ss_manager.load_spritesheet(filepath, {54, 64});
+      std::optional<e2d::Entity::Id> i = ss_manager.load_spritesheet(filepath, {54, 64});
       std::cout << (i.has_value() ? std::to_string(i.value()) : "null");
     }
     else if (cmd == "is_valid_ss_id") {

@@ -1,6 +1,6 @@
 #include "./input_manager.hpp"
 
-namespace Engine {
+namespace e2d {
 
 InputManager::InputManager() : m_event_callback_pairs{} { m_event_callback_pairs.reserve(16); }
 
@@ -19,4 +19,4 @@ void InputManager::update(sf::Window &win) {
   }
 }
 
-}  // namespace Engine
+}  // namespace e2d
