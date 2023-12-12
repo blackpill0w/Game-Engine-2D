@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(engine-demo CXX)
+project(e2d CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -21,18 +21,22 @@ set(JSONCPP_WITH_POST_BUILD_UNITTEST OFF)
 set(JSONCPP_WITH_TESTS OFF)
 #add_subdirectory(deps/jsoncpp)
 
-add_executable(engine-demo
+add_library(e2d STATIC
   src/character.cpp
   src/input_manager.cpp
   src/spritesheets_manager.cpp
   src/world.cpp
   src/animation_manager.cpp
-  src/engine.cpp
-  src/main.cpp)
-target_link_libraries(engine-demo
+  src/engine.cpp)
+target_link_libraries(e2d
   sfml-window sfml-graphics
-# jsoncpp
 )
+
+add_executable(engine-demo
+  src/main.cpp
+)
+target_link_libraries(engine-demo
+  e2d)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Copy root/build/compile_commands.json to root/
