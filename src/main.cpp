@@ -11,7 +11,7 @@ int main() {
       [&] { fmt::print("Hello, Mr. K"); });
 
   const auto laura_id = engine.world.new_character();
-  auto laura_ss_id    = engine.spritesheets_manager.load_spritesheet("../assets/laura.png", {64, 64});
+  auto laura_ss_id = engine.spritesheets_manager.load_spritesheet("../assets/laura.png", {64, 64});
   if (not laura_ss_id.has_value()) {
     fmt::print(stderr, "Couldn't load spritesheet");
     exit(1);

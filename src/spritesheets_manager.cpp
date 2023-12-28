@@ -31,8 +31,8 @@ bool SpritesheetsManager::is_valid_sprite(const Entity::Id id, const size_t ani_
 const Texture *SpritesheetsManager::get_spritesheet(const Entity::Id id) const {
   if (! is_valid_spritesheet_id(id))
     return nullptr;
-  const auto ss = std::ranges::find_if(m_spritesheets,
-                                       [&](const Texture &txtr) { return txtr.ntt.id == id; });
+  const auto ss =
+      std::ranges::find_if(m_spritesheets, [&](const Texture &txtr) { return txtr.ntt.id == id; });
   return &(*ss);
 }
 

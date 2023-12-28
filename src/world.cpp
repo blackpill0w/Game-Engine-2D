@@ -14,7 +14,7 @@ const std::vector<Entity::Id> World::get_characters() const {
 
 Entity::Id World::new_character() {
   Sprite c{};
-  const auto id    = c.ntt.id;
+  const auto id = c.ntt.id;
   m_characters.emplace(id, std::move(c));
   return id;
 }
