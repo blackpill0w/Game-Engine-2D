@@ -6,13 +6,12 @@
 #include "./spritesheets_manager.hpp"
 #include "./world.hpp"
 #include "./animation_manager.hpp"
+#include "./physics_engine.hpp"
 
 namespace e2d {
 class Engine {
  public:
-  /**
-    Initialises the engine and its components, and sets an event to handle closing the window.
-  */
+  //** Initialises the engine and its components, and sets an event to handle closing the window.
   Engine();
   void run();
 
@@ -21,6 +20,7 @@ class Engine {
   SpritesheetsManager spritesheets_manager;
   World world;
   AnimationManager animation_manager;
+  PhysicsEngine physics_engine;
   // TODO: rendering engine
 
  protected:

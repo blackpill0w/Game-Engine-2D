@@ -14,7 +14,7 @@ SpritesheetsManager::SpritesheetsManager() : entity{}, m_spritesheets{}, m_sprit
 }
 
 bool SpritesheetsManager::is_valid_spritesheet_id(const Entity::Id id) const {
-  return std::ranges::any_of(m_spritesheets, [id](const Texture &x) { return x.get_id() == id; });
+  return std::ranges::any_of(m_spritesheets, [id](const Texture &x) { return x.ntt.id == id; });
 }
 
 bool SpritesheetsManager::is_valid_animation_state(const Entity::Id id,
@@ -32,7 +32,7 @@ const Texture *SpritesheetsManager::get_spritesheet(const Entity::Id id) const {
   if (! is_valid_spritesheet_id(id))
     return nullptr;
   const auto ss = std::ranges::find_if(m_spritesheets,
-                                       [&](const Texture &txtr) { return txtr.get_id() == id; });
+                                       [&](const Texture &txtr) { return txtr.ntt.id == id; });
   return &(*ss);
 }
 
@@ -46,9 +46,9 @@ optional<Entity::Id> SpritesheetsManager::load_spritesheet(const std::string &fi
     m_spritesheets.pop_back();
     return std::nullopt;
   }
-  m_sprites.emplace(m_spritesheets.back().get_id(), std::move(*ss_sprites));
+  m_sprites.emplace(m_spritesheets.back().ntt.id, std::move(*ss_sprites));
 
-  return m_spritesheets.back().get_id();
+  return m_spritesheets.back().ntt.id;
 }
 
 optional<size_t> SpritesheetsManager::animation_states_num(const Entity::Id id) const {
@@ -78,7 +78,7 @@ optional<Entity::Id> SpritesheetsManager::add_spritesheet(const std::string &fil
     return std::nullopt;
   m_spritesheets.emplace_back(std::move(txtr));
 
-  return m_spritesheets.back().get_id();
+  return m_spritesheets.back().ntt.id;
 }
 
 optional<vector<vector<SpriteCoordinates>>> SpritesheetsManager::split_spritesheet(

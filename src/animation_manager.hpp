@@ -22,18 +22,14 @@ class AnimationManager {
   /**
      Bind a drawable entities to a spritesheet.
      # Return
-     `false` if `spritesheet_id` doesn't refer to an existing spritesheet
-     or `id` isn't a valid entity.
-  */
+     `false` if `spritesheet_id` or `id` are invalid.
+   */
   bool bind_entity(const Entity::Id id, const Entity::Id spritesheet_id);
   bool set_animation_state(const Entity::Id id, const std::size_t ani_state);
-
   void update();
 
  protected:
-  /**
-     Store drawable entities and spritesheets pairs.
-    */
+  //** Store drawable entities and spritesheets pairs.
   std::unordered_map<Entity::Id, AnimationData> m_anim_data;
   Engine *m_parent;
 };

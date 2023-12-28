@@ -5,16 +5,10 @@
 
 namespace e2d {
 
-/*
-  A class representing an `sf::Texture` as an entity.
- */
-class Texture : public Entity {
+//** A wrapper around `sf::Texture`.
+class Texture {
  public:
-  /*
-    # Note:
-    The class takes ownership of `txtr_`.
-   */
-  Texture(const std::string &filename) : Entity{}, txtr{} { load_from_file(filename); }
+  Texture(const std::string &filename) : ntt{}, txtr{} { load_from_file(filename); }
   bool has_texture() const { return m_has_texture; }
   bool load_from_file(const std::string &filename) {
     if (txtr.loadFromFile(filename)) {
@@ -24,6 +18,7 @@ class Texture : public Entity {
   }
 
  public:
+  Entity ntt;
   sf::Texture txtr;
 
  protected:
