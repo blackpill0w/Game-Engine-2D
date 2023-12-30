@@ -43,4 +43,4 @@ Build using [CMake](https://cmake.org).
 
 If it doesn't work, install the following libraries:
 - [SFML](https://sfml-dev.org)
-- [JsonCpp](https://github.com/open-source-parsers/jsoncpp)
+- [tinyxml2](https://github.com/leethomason/tinyxml2)

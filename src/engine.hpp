@@ -11,8 +11,9 @@
 namespace e2d {
 class Engine {
  public:
-  //** Initialises the engine and its components, and sets an event to handle closing the window.
+  //** Initialises the engine and its components.
   Engine();
+  //** Creates the window, starts the game loop, and sets an event to handle closing the window.
   void run();
 
  public:
@@ -22,8 +23,5 @@ class Engine {
   AnimationManager animation_manager;
   PhysicsEngine physics_engine;
   // TODO: rendering engine
-
- protected:
-  sf::RenderWindow win;
 };
 }  // namespace e2d

@@ -18,7 +18,11 @@ int main() {
   }
   engine.world.get_character(laura_id)->sprite.setPosition(200.f, 200.f);
   engine.animation_manager.bind_entity(laura_id, *laura_ss_id);
-  engine.animation_manager.set_animation_state(laura_id, (size_t) LauraAnimationStates::FacingDown);
+  engine.animation_manager.set_animation_state(laura_id, size_t(LauraAnimationStates::FacingDown));
+
+  const auto tileset_id =
+      engine.spritesheets_manager.load_tiled_tileset("../maps/modern-city.tsx").value();
+  engine.world.load_tiled_map("../maps/map1.tmx", tileset_id);
 
   engine.input_manager.bind(
       std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyPress, e2d::KeyEvent::Key::G), [&] {
@@ -40,6 +44,20 @@ int main() {
         engine.animation_manager.set_animation_state(laura_id,
                                                      (size_t) LauraAnimationStates::FacingLeft);
         engine.world.get_character(laura_id)->sprite.move(-5.f, 0.f);
+      });
+
+  engine.input_manager.bind(
+      std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyPress, e2d::KeyEvent::Key::Up), [&] {
+        engine.animation_manager.set_animation_state(laura_id,
+                                                     (size_t) LauraAnimationStates::FacingUp);
+        engine.world.get_character(laura_id)->sprite.move(0.f, -5.f);
+      });
+
+  engine.input_manager.bind(
+      std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyPress, e2d::KeyEvent::Key::Down), [&] {
+        engine.animation_manager.set_animation_state(laura_id,
+                                                     (size_t) LauraAnimationStates::FacingDown);
+        engine.world.get_character(laura_id)->sprite.move(0.f, 5.f);
       });
 
   engine.run();

@@ -3,6 +3,7 @@ project(e2d CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 string(CONCAT CMAKE_CXX_FLAGS
   "${CMAKE_CXX_FLAGS}"
   " -Wall -Wextra"
@@ -14,6 +15,7 @@ string(CONCAT CMAKE_CXX_FLAGS
 
 set(BUILD_SHARED_LIBS OFF)
 
+find_package(tinyxml2 REQUIRED)
 find_package(fmt REQUIRED)
 find_package(EASTL REQUIRED)
 
@@ -34,6 +36,7 @@ add_library(e2d STATIC
   src/physics_engine.cpp
   src/engine.cpp)
 target_link_libraries(e2d
+  tinyxml2::tinyxml2
   fmt::fmt
   EASTL::EASTL
   sfml-window sfml-graphics

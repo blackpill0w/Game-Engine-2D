@@ -11,7 +11,7 @@ class Engine;
 
 struct AnimationData {
   Entity::Id spritesheet_id = Entity::InvalidId;
-  float anim_speed          = 0.1f;
+  float anim_speed          = 0.2f;
   std::size_t ani_state     = 0;
   float sprite_num          = 0.f;
 };

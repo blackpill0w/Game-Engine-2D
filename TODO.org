@@ -1,4 +1,5 @@
 * TODO Game Engine
+* TODO IMPORTANT: refactor load_tiled_map() function, it's a mess
 ** DONE Textures & Spritesheets Manager
 ** DONE Characters
 ** DONE Events (Keyboard at least)
