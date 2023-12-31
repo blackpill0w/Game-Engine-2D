@@ -5,6 +5,6 @@
 ** DONE Events (Keyboard at least)
 ** DONE World
 ** DONE Animation
-** TODO Gravity
-** TODO Notification System
+** DONE Gravity
 ** TODO Collision Detection
+** TODO Notification System
