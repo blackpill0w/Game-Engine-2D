@@ -1,8 +1,0 @@
-[requires]
-tinyxml2/9.0.0
-fmt/10.1.0
-eastl/3.21.12
-
-[generators]
-CMakeDeps
-CMakeToolchain

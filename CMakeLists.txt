@@ -14,18 +14,11 @@ string(CONCAT CMAKE_CXX_FLAGS
   " -Wformat=2 -Wformat-security")
 
 set(BUILD_SHARED_LIBS OFF)
+set(BUILD_TESTING OFF)
 
-find_package(tinyxml2 REQUIRED)
-find_package(fmt REQUIRED)
-find_package(EASTL REQUIRED)
-
-add_subdirectory(deps/SFML-2.6.1)
-
-# JsonCpp
-set(JSONCPP_WITH_POST_BUILD_UNITTEST OFF)
-set(JSONCPP_WITH_POST_BUILD_UNITTEST OFF)
-set(JSONCPP_WITH_TESTS OFF)
-#add_subdirectory(deps/jsoncpp)
+add_subdirectory("deps/SFML-2.6.1")
+add_subdirectory("deps/fmt-10.1.0")
+add_subdirectory("deps/tinyxml2")
 
 add_library(e2d STATIC
   src/sprite.cpp
@@ -38,7 +31,6 @@ add_library(e2d STATIC
 target_link_libraries(e2d
   tinyxml2::tinyxml2
   fmt::fmt
-  EASTL::EASTL
   sfml-window sfml-graphics
 )
 
