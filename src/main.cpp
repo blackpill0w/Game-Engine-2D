@@ -36,27 +36,27 @@ int main() {
   engine.input_manager.bind(
       std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyPress, e2d::KeyEvent::Key::Right), [&] {
         engine.animation_manager.set_animation_state(laura_id,
-                                                     (size_t) LauraAnimationStates::FacingRight);
+                                                     size_t(LauraAnimationStates::FacingRight));
         engine.world.get_character(laura_id)->sprite.move(5.f, 0.f);
       });
   engine.input_manager.bind(
       std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyPress, e2d::KeyEvent::Key::Left), [&] {
         engine.animation_manager.set_animation_state(laura_id,
-                                                     (size_t) LauraAnimationStates::FacingLeft);
+                                                     size_t(LauraAnimationStates::FacingLeft=);
         engine.world.get_character(laura_id)->sprite.move(-5.f, 0.f);
       });
 
   engine.input_manager.bind(
       std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyPress, e2d::KeyEvent::Key::Up), [&] {
         engine.animation_manager.set_animation_state(laura_id,
-                                                     (size_t) LauraAnimationStates::FacingUp);
+                                                     size_t(LauraAnimationStates::FacingUp));
         engine.world.get_character(laura_id)->sprite.move(0.f, -5.f);
       });
 
   engine.input_manager.bind(
       std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyPress, e2d::KeyEvent::Key::Down), [&] {
         engine.animation_manager.set_animation_state(laura_id,
-                                                     (size_t) LauraAnimationStates::FacingDown);
+                                                     size_t(LauraAnimationStates::FacingDown));
         engine.world.get_character(laura_id)->sprite.move(0.f, 5.f);
       });
 
