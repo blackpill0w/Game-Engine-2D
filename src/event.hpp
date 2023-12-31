@@ -16,9 +16,7 @@ class AbstractEvent {
   const EventType m_type;
 };
 
-/**
-   Represents a windows close event.
- */
+//** Represents a windows close event.
 class CloseWindowEvent : public AbstractEvent {
  public:
   CloseWindowEvent() : AbstractEvent{EventType::CloseWindow} {}
@@ -45,9 +43,10 @@ class KeyEvent : public AbstractEvent {
   bool equals_sfml_event(const sf::Event &e) const override {
     const bool press_event   = e.type == sf::Event::KeyPressed and m_type == EventType::KeyPress;
     const bool release_event = e.type == sf::Event::KeyReleased and m_type == EventType::KeyRelease;
-    const bool correct_key_are_pressed = e.key.code == m_key and e.key.control == m_ctrl and
-                                         e.key.alt == m_alt and e.key.shift == m_shift;
-    return (press_event or release_event) and correct_key_are_pressed;
+    // NOTE: This thing gives a unintialised variable warning when running Valgrind.
+    const bool same_keys = e.key.code == m_key and e.key.control == m_ctrl and
+                           e.key.alt == m_alt and e.key.shift == m_shift;
+    return (press_event or release_event) and same_keys;
   }
 
  protected:
