@@ -68,12 +68,9 @@ bool World::load_tiled_map(const std::string &filename, const Entity::Id txtr_id
     exit(1);
   }
   const size_t fst_tile_id = tileset_info->Unsigned64Attribute("firstgid");
-  fmt::println("fst_tiled_id {}", fst_tile_id);
 
   for (auto *layer = map->FirstChildElement("layer"); layer != nullptr;
        layer       = layer->NextSiblingElement("layer")) {
-    const size_t w        = layer->Unsigned64Attribute("width");
-    const size_t h        = layer->Unsigned64Attribute("height");
     const auto *data_elem = layer->FirstChildElement("data");
     if (data_elem == nullptr) {
       fmt::println(stderr, "ERROR: Data node not found in <layer>.");
@@ -86,6 +83,8 @@ bool World::load_tiled_map(const std::string &filename, const Entity::Id txtr_id
       exit(1);
     }
 
+    const size_t tile_w = map->Unsigned64Attribute("tilewidth");
+    const size_t tile_h = map->Unsigned64Attribute("tileheight");
     const Texture *txtr = this->m_parent->spritesheets_manager.get_spritesheet(txtr_id);
     size_t x = 0, y = 0;
     const char *c = data_elem->GetText();
@@ -110,12 +109,12 @@ bool World::load_tiled_map(const std::string &filename, const Entity::Id txtr_id
         if (id >= fst_tile_id) {
           id -= fst_tile_id;
           Sprite s{};
-          s.sprite.setPosition(x * 16, y * 16);
+          s.sprite.setPosition(x * tile_w, y * tile_h);
           m_static_tiles.emplace(s.ntt.id, std::move(s));
           m_static_tiles.at(s.ntt.id).sprite.setTexture(txtr->txtr);
-          const auto dx = int((id % 16) * 16);
-          const auto dy = int(id - id % 16);
-          m_static_tiles.at(s.ntt.id).sprite.setTextureRect({dx, dy, 16, 16});
+          const int mapx = (id % tile_w) * tile_w;
+          const int mapy = id - id % tile_h;
+          m_static_tiles.at(s.ntt.id).sprite.setTextureRect({mapx, mapy, int(tile_w), int(tile_h)});
         }
       }
     }
