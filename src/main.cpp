@@ -42,7 +42,7 @@ int main() {
   engine.input_manager.bind(
       std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyPress, e2d::KeyEvent::Key::Left), [&] {
         engine.animation_manager.set_animation_state(laura_id,
-                                                     size_t(LauraAnimationStates::FacingLeft=);
+                                                     size_t(LauraAnimationStates::FacingLeft));
         engine.world.get_character(laura_id)->sprite.move(-5.f, 0.f);
       });
 

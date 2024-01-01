@@ -31,11 +31,17 @@ const std::vector<Entity::Id> World::get_static_tiles() const {
     res.push_back(id);
   return res;
 }
+
 Entity::Id World::new_character() {
   Sprite c{};
   const auto id = c.ntt.id;
   m_characters.emplace(id, std::move(c));
   return id;
+}
+
+Sprite *World::get_character_or_tile(const Entity::Id id) {
+  auto *c = get_character(id);
+  return c != nullptr ? c : get_static_tile(id);
 }
 
 bool World::is_valid_entity(const Entity::Id id) const { return m_characters.contains(id); }

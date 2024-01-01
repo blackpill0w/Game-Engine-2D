@@ -23,6 +23,7 @@ class World {
   Sprite *get_static_tile(const Entity::Id id);
   //** Returns `nullptr` if the character doesn't exist.
   Sprite *get_character(const Entity::Id id);
+  Sprite *get_character_or_tile(const Entity::Id id);
   /**
      Load a map that was made by the <a href="https://www.mapeditor.org">Tiled</a> map editor.
      @param `filename` path (relative or absolute) to the map file (.tmx)
