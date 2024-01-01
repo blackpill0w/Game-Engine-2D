@@ -14,6 +14,7 @@ struct AnimationData {
   float anim_speed          = 0.2f;
   std::size_t ani_state     = 0;
   float sprite_num          = 0.f;
+  bool pause_animation      = false;
 };
 
 class AnimationManager {
@@ -26,6 +27,8 @@ class AnimationManager {
    */
   bool bind_entity(const Entity::Id id, const Entity::Id spritesheet_id);
   bool set_animation_state(const Entity::Id id, const std::size_t ani_state);
+  bool pause_animation(const Entity::Id id);
+  bool continue_animation(const Entity::Id id);
   void update();
 
  protected:

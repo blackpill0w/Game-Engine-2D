@@ -21,6 +21,12 @@ bool AnimationManager::bind_entity(const Entity::Id id, const Entity::Id ss_id) 
   m_anim_data[id].spritesheet_id = ss_id;
   m_anim_data[id].ani_state      = 2;
   m_anim_data[id].sprite_num     = 2;
+
+  m_parent->world.get_character(id)->sprite.setTexture(
+      m_parent->spritesheets_manager.get_spritesheet(ss_id)->txtr);
+  const auto rect = *m_parent->spritesheets_manager.get_sprite_at(ss_id, 0, 0);
+  m_parent->world.get_character(id)->sprite.setTextureRect(
+      {int(rect.top), int(rect.left), int(rect.width), int(rect.height)});
   // TODO: move this to the rendering engine
   // m_parent->world.get_character(id)->sprite.setTexture(
   //    m_parent->spritesheets_manager.get_spritesheet(id)->txtr);
@@ -49,9 +55,25 @@ bool AnimationManager::set_animation_state(const Entity::Id id, const std::size_
   return true;
 }
 
+bool AnimationManager::pause_animation(const Entity::Id id) {
+  if (not m_anim_data.contains(id))
+    return false;
+  m_anim_data.at(id).pause_animation = true;
+  return true;
+}
+
+bool AnimationManager::continue_animation(const Entity::Id id) {
+  if (not m_anim_data.contains(id))
+    return false;
+  m_anim_data.at(id).pause_animation = false;
+  return true;
+}
+
 void AnimationManager::update() {
   auto &ss_manager = m_parent->spritesheets_manager;
   for (auto &[id, anim_data] : m_anim_data) {
+    if (anim_data.pause_animation)
+      continue;
     anim_data.sprite_num += anim_data.anim_speed;
     auto max_sprite_num =
         ss_manager.animation_state_sprites_num(anim_data.spritesheet_id, anim_data.ani_state);
@@ -61,7 +83,7 @@ void AnimationManager::update() {
     // TODO: move this to the rendering engine
     const Texture *ss    = m_parent->spritesheets_manager.get_spritesheet(anim_data.spritesheet_id);
     const auto ss_coords = m_parent->spritesheets_manager.get_sprite_coordinates(
-        anim_data.spritesheet_id, anim_data.ani_state, std::size_t(anim_data.sprite_num));
+        anim_data.spritesheet_id, anim_data.ani_state, size_t(anim_data.sprite_num));
     assert(ss_coords.has_value());
 
     // TODO: get rid of this conversion

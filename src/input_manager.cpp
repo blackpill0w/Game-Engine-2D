@@ -11,9 +11,9 @@ void InputManager::bind(std::unique_ptr<AbstractEvent> e, Callback f) {
 void InputManager::update(sf::Window &win) {
   sf::Event e;
   while (win.pollEvent(e)) {
-    for (size_t i = 0; i < m_event_callback_pairs.size(); ++i) {
-      if (m_event_callback_pairs[i].first->equals_sfml_event(e)) {
-        m_event_callback_pairs[i].second();
+    for (const auto &[event, callback] : m_event_callback_pairs) {
+      if (event->equals_sfml_event(e)) {
+        callback();
       }
     }
   }

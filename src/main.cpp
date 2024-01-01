@@ -19,6 +19,9 @@ int main() {
   engine.world.get_character(laura_id)->sprite.setPosition(200.f, 200.f);
   engine.animation_manager.bind_entity(laura_id, *laura_ss_id);
   engine.animation_manager.set_animation_state(laura_id, size_t(LauraAnimationStates::FacingDown));
+  engine.animation_manager.pause_animation(laura_id);
+
+  const float speed = 1.f;
 
   const auto tileset_id =
       engine.spritesheets_manager.load_tiled_tileset("../maps/modern-city.tsx").value();
@@ -35,30 +38,48 @@ int main() {
 
   engine.input_manager.bind(
       std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyPress, e2d::KeyEvent::Key::Right), [&] {
+        engine.animation_manager.continue_animation(laura_id);
         engine.animation_manager.set_animation_state(laura_id,
                                                      size_t(LauraAnimationStates::FacingRight));
-        engine.world.get_character(laura_id)->sprite.move(5.f, 0.f);
+        engine.world.get_character(laura_id)->sprite.move(speed, 0.f);
       });
   engine.input_manager.bind(
       std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyPress, e2d::KeyEvent::Key::Left), [&] {
+        engine.animation_manager.continue_animation(laura_id);
         engine.animation_manager.set_animation_state(laura_id,
                                                      size_t(LauraAnimationStates::FacingLeft));
-        engine.world.get_character(laura_id)->sprite.move(-5.f, 0.f);
+        engine.world.get_character(laura_id)->sprite.move(-speed, 0.f);
       });
 
   engine.input_manager.bind(
       std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyPress, e2d::KeyEvent::Key::Up), [&] {
+        engine.animation_manager.continue_animation(laura_id);
         engine.animation_manager.set_animation_state(laura_id,
                                                      size_t(LauraAnimationStates::FacingUp));
-        engine.world.get_character(laura_id)->sprite.move(0.f, -5.f);
+        engine.world.get_character(laura_id)->sprite.move(0.f, -speed);
       });
 
   engine.input_manager.bind(
       std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyPress, e2d::KeyEvent::Key::Down), [&] {
+        engine.animation_manager.continue_animation(laura_id);
         engine.animation_manager.set_animation_state(laura_id,
                                                      size_t(LauraAnimationStates::FacingDown));
-        engine.world.get_character(laura_id)->sprite.move(0.f, 5.f);
+        engine.world.get_character(laura_id)->sprite.move(0.f, speed);
       });
+
+  engine.input_manager.bind(
+      std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyRelease, e2d::KeyEvent::Key::Right),
+      [&] { engine.animation_manager.pause_animation(laura_id); });
+
+  engine.input_manager.bind(
+      std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyRelease, e2d::KeyEvent::Key::Left),
+      [&] { engine.animation_manager.pause_animation(laura_id); });
+  engine.input_manager.bind(
+      std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyRelease, e2d::KeyEvent::Key::Up),
+      [&] { engine.animation_manager.pause_animation(laura_id); });
+  engine.input_manager.bind(
+      std::make_unique<e2d::KeyEvent>(e2d::EventType::KeyRelease, e2d::KeyEvent::Key::Down),
+      [&] { engine.animation_manager.pause_animation(laura_id); });
 
   engine.run();
 }
