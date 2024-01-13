@@ -32,7 +32,6 @@ class PhysicsEngine {
   void apply_gravity();
 
  protected:
-  // maximum velocity and increment value
   std::unordered_map<Entity::Id, EntityGravityData> m_gravity_data;
   std::unordered_map<Entity::Id, std::function<void(const Direction dir)>> m_collision_callbacks;
   Engine *m_parent;

@@ -28,26 +28,27 @@ class SpritesheetsManager {
 
   /**
      Get the number of animation states.
-     @param `id` id of the spritesheet
+     @param `id` id of the spritesheet.
    */
   std::optional<size_t> animation_states_num(const Entity::Id id) const;
 
   /**
      Get the number of sprites of an animation state.
-     @param `id` id of the spritesheet
-     @param `ani_state` number of the animation state
+     @param `id` id of the spritesheet.
+     @param `ani_state` number of the animation state.
    */
   std::optional<size_t> animation_state_sprites_num(const Entity::Id id,
                                                     const size_t ani_state) const;
 
-  //** `id` is the id of the desired `Texture`
+  //** `id` is the id of the desired `Texture`.
   std::optional<SpriteCoordinates> get_sprite_at(const Entity::Id id, const size_t row,
                                                  const size_t col) const;
-  // Alias for get_sprite_at()
+  //** Alias for get_sprite_at().
   std::optional<SpriteCoordinates> get_sprite_coordinates(const Entity::Id id,
                                                           const size_t ani_state,
                                                           const size_t idx) const;
 
+  //** Get a sprite given it's id in a Tiled map.
   std::optional<SpriteCoordinates> get_sprite_with_tiled_id(const Entity::Id id,
                                                             const size_t tiled_id) const;
 
