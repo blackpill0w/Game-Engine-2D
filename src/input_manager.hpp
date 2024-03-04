@@ -12,7 +12,7 @@
 namespace e2d {
 
 using EventCallbackPair = std::pair<std::unique_ptr<AbstractEvent>, Callback>;
-  using KeyCallbackPair = std::pair<KeyEvent::Key, Callback>;
+using KeyCallbackPair   = std::pair<KeyEvent::Key, Callback>;
 
 class InputManager {
  public:
