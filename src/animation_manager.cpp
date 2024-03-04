@@ -23,10 +23,12 @@ bool AnimationManager::bind_entity(const Entity::Id id, const Entity::Id ss_id) 
   m_anim_data[id].sprite_num     = 2;
 
   m_parent->world.get_character(id)->sprite.setTexture(
-      m_parent->spritesheets_manager.get_spritesheet(ss_id)->txtr);
+      m_parent->spritesheets_manager.get_spritesheet(ss_id)->txtr
+  );
   const auto rect = *m_parent->spritesheets_manager.get_sprite_at(ss_id, 0, 0);
   m_parent->world.get_character(id)->sprite.setTextureRect(
-      {int(rect.top), int(rect.left), int(rect.width), int(rect.height)});
+      {int(rect.top), int(rect.left), int(rect.width), int(rect.height)}
+  );
   // TODO: move this to the rendering engine
   // m_parent->world.get_character(id)->sprite.setTexture(
   //    m_parent->spritesheets_manager.get_spritesheet(id)->txtr);
@@ -83,12 +85,14 @@ void AnimationManager::update() {
     // TODO: move this to the rendering engine
     const Texture *ss    = m_parent->spritesheets_manager.get_spritesheet(anim_data.spritesheet_id);
     const auto ss_coords = m_parent->spritesheets_manager.get_sprite_coordinates(
-        anim_data.spritesheet_id, anim_data.ani_state, size_t(anim_data.sprite_num));
+        anim_data.spritesheet_id, anim_data.ani_state, size_t(anim_data.sprite_num)
+    );
     assert(ss_coords.has_value());
 
     // TODO: get rid of this conversion
-    const sf::IntRect coords{int(ss_coords->left), int(ss_coords->top), int(ss_coords->width),
-                             int(ss_coords->height)};
+    const sf::IntRect coords{
+        int(ss_coords->left), int(ss_coords->top), int(ss_coords->width), int(ss_coords->height)
+    };
     m_parent->world.get_character(id)->sprite.setTexture(ss->txtr);
     m_parent->world.get_character(id)->sprite.setTextureRect(coords);
   }

@@ -55,13 +55,12 @@ Sprite *World::get_static_tile(const Entity::Id id) {
 }
 
 bool World::load_tiled_map(const std::string &filename, const Entity::Id txtr_id) {
-  if (not fs::exists(filename) or not fs::is_regular_file(filename))
-    return false;
   tinyxml2::XMLDocument map_file{};
   const auto err = map_file.LoadFile(filename.c_str());
   if (tinyxml2::XML_SUCCESS != err) {
-    fmt::println(stderr, "ERROR: There was an error parsing the map file `{}`, here is some info:",
-                 filename);
+    fmt::println(
+        stderr, "ERROR: There was an error parsing the map file `{}`, here is some info:", filename
+    );
     fmt::println(stderr, "\t- Error code: {}", size_t(err));
     fmt::println(stderr, "\t- Error line number: {}", map_file.ErrorLineNum());
     fmt::println(stderr, "\t- Error string: {}", map_file.ErrorStr());
@@ -100,8 +99,7 @@ bool World::load_tiled_map(const std::string &filename, const Entity::Id txtr_id
       if (*c == '\n') {
         ++y;
         x = 0;
-      }
-      else if (*c == ',')
+      } else if (*c == ',')
         ++x;
       else if (std::isdigit(*c)) {
         size_t id = 0;

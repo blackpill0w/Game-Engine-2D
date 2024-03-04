@@ -22,14 +22,15 @@ bool SpritesheetsManager::is_valid_spritesheet_id(const Entity::Id id) const {
   return std::ranges::any_of(m_spritesheets, [id](const Texture &x) { return x.ntt.id == id; });
 }
 
-bool SpritesheetsManager::is_valid_animation_state(const Entity::Id id,
-                                                   const size_t ani_state) const {
+bool SpritesheetsManager::is_valid_animation_state(const Entity::Id id, const size_t ani_state)
+    const {
   optional<size_t> ani_state_num = animation_states_num(id);
   return ani_state_num.has_value() and ani_state < ani_state_num;
 }
 
-bool SpritesheetsManager::is_valid_sprite(const Entity::Id id, const size_t ani_state,
-                                          const size_t idx) const {
+bool SpritesheetsManager::is_valid_sprite(
+    const Entity::Id id, const size_t ani_state, const size_t idx
+) const {
   return is_valid_animation_state(id, ani_state) and idx < m_sprites.at(id).at(ani_state).size();
 }
 
@@ -41,8 +42,9 @@ const Texture *SpritesheetsManager::get_spritesheet(const Entity::Id id) const {
   return &(*ss);
 }
 
-optional<Entity::Id> SpritesheetsManager::load_spritesheet(const std::string &filename,
-                                                           const sf::Vector2<size_t> sprite_size) {
+optional<Entity::Id> SpritesheetsManager::load_spritesheet(
+    const std::string &filename, const sf::Vector2<size_t> sprite_size
+) {
   if (not add_spritesheet(filename).has_value())
     return std::nullopt;
 
@@ -62,29 +64,31 @@ optional<size_t> SpritesheetsManager::animation_states_num(const Entity::Id id) 
   return m_sprites.at(id).size();
 }
 
-optional<size_t> SpritesheetsManager::animation_state_sprites_num(const Entity::Id id,
-                                                                  const size_t ani_state) const {
+optional<size_t> SpritesheetsManager::animation_state_sprites_num(
+    const Entity::Id id, const size_t ani_state
+) const {
   if (not is_valid_animation_state(id, ani_state))
     return std::nullopt;
   return m_sprites.at(id).at(ani_state).size();
 }
 
-optional<SpriteCoordinates> SpritesheetsManager::get_sprite_at(const Entity::Id id,
-                                                               const size_t ani_state,
-                                                               const size_t idx) const {
+optional<SpriteCoordinates> SpritesheetsManager::get_sprite_at(
+    const Entity::Id id, const size_t ani_state, const size_t idx
+) const {
   if (not is_valid_spritesheet_id(id))
     return std::nullopt;
   return m_sprites.at(id).at(ani_state).at(idx);
 }
 
-optional<SpriteCoordinates> SpritesheetsManager::get_sprite_coordinates(const Entity::Id id,
-                                                                        const size_t row,
-                                                                        const size_t col) const {
+optional<SpriteCoordinates> SpritesheetsManager::get_sprite_coordinates(
+    const Entity::Id id, const size_t row, const size_t col
+) const {
   return get_sprite_at(id, row, col);
 }
 
 optional<SpriteCoordinates> SpritesheetsManager::get_sprite_with_tiled_id(
-    const Entity::Id id, const size_t tiled_id) const {
+    const Entity::Id id, const size_t tiled_id
+) const {
   if (not is_valid_spritesheet_id(id))
     return std::nullopt;
   const size_t len = m_sprites.at(id).size();
@@ -103,7 +107,8 @@ optional<Entity::Id> SpritesheetsManager::add_spritesheet(const std::string &fil
 }
 
 optional<vector<vector<SpriteCoordinates>>> SpritesheetsManager::split_spritesheet(
-    const Texture &ss, const sf::Vector2<size_t> size) const {
+    const Texture &ss, const sf::Vector2<size_t> size
+) const {
   if (size.x > ss.txtr.getSize().x || size.y > ss.txtr.getSize().y)
     return std::nullopt;
 
@@ -123,8 +128,9 @@ std::optional<Entity::Id> SpritesheetsManager::load_tiled_tileset(const std::str
   tinyxml2::XMLDocument tileset_tsx_file{};
   const auto err = tileset_tsx_file.LoadFile(filename.c_str());
   if (tinyxml2::XML_SUCCESS != err) {
-    fmt::println(stderr, "ERROR: There was an error parsing the map file `{}`, here is some info:",
-                 filename);
+    fmt::println(
+        stderr, "ERROR: There was an error parsing the map file `{}`, here is some info:", filename
+    );
     fmt::println(stderr, "\t- Error code: {}", size_t(err));
     fmt::println(stderr, "\t- Error line number: {}", tileset_tsx_file.ErrorLineNum());
     fmt::println(stderr, "\t- Error string: {}", tileset_tsx_file.ErrorStr());

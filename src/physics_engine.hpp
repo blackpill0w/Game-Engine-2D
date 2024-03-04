@@ -3,6 +3,8 @@
 #include <unordered_map>
 #include <functional>
 
+#include <SFML/Graphics.hpp>
+
 #include "./entity.hpp"
 
 namespace e2d {
@@ -16,6 +18,13 @@ struct EntityGravityData {
   float increment_val;
   float max_velocity;
 };
+
+/**
+   Coordinates of tiles, for example, if tile size is 64x64,
+   and we have a sprite whose coordinates are {64, 64},
+   the tile's coordinates would be {1, 1}.
+*/
+using TileCoordinates = sf::Vector2<size_t>;
 
 class PhysicsEngine {
  public:

@@ -9,7 +9,9 @@ namespace e2d {
 class Texture {
  public:
   Texture(const std::string &filename) : ntt{}, txtr{} { load_from_file(filename); }
+
   bool has_texture() const { return m_has_texture; }
+
   bool load_from_file(const std::string &filename) {
     if (txtr.loadFromFile(filename)) {
       m_has_texture = true;

@@ -13,6 +13,7 @@ Engine::Engine()
 
 void Engine::run() {
   sf::RenderWindow win{sf::VideoMode{500, 500}, "Engine Demo"};
+  win.setKeyRepeatEnabled(false);
 
   input_manager.bind(std::make_unique<CloseWindowEvent>(), [&] { win.close(); });
 

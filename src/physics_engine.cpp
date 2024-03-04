@@ -5,8 +5,9 @@ namespace e2d {
 
 PhysicsEngine::PhysicsEngine(Engine *parent) : m_parent{parent} {}
 
-bool PhysicsEngine::enable_gravity(const Entity::Id id, const float max_velocity,
-                                   const float increment_val) {
+bool PhysicsEngine::enable_gravity(
+    const Entity::Id id, const float max_velocity, const float increment_val
+) {
   if (not m_parent->world.is_valid_entity(id)) {
     return false;
   }

@@ -13,6 +13,7 @@ string(CONCAT CMAKE_CXX_FLAGS
   " -Wnull-dereference -Wuseless-cast"
   " -Wformat=2 -Wformat-security")
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(BUILD_SHARED_LIBS OFF)
 set(BUILD_TESTING OFF)
 
@@ -39,9 +40,3 @@ add_executable(engine-demo
 )
 target_link_libraries(engine-demo
   e2d)
-
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-# Copy root/build/compile_commands.json to root/
-if (EXISTS "${CMAKE_BINARY_DIR}/compile_commands.json")
-  FILE(COPY ${CMAKE_BINARY_DIR}/compile_commands.json DESTINATION ${CMAKE_HOME_DIRECTORY})
-endif()

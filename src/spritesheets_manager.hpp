@@ -37,20 +37,22 @@ class SpritesheetsManager {
      @param `id` id of the spritesheet.
      @param `ani_state` number of the animation state.
    */
-  std::optional<size_t> animation_state_sprites_num(const Entity::Id id,
-                                                    const size_t ani_state) const;
+  std::optional<size_t> animation_state_sprites_num(const Entity::Id id, const size_t ani_state)
+      const;
 
   //** `id` is the id of the desired `Texture`.
-  std::optional<SpriteCoordinates> get_sprite_at(const Entity::Id id, const size_t row,
-                                                 const size_t col) const;
+  std::optional<SpriteCoordinates> get_sprite_at(
+      const Entity::Id id, const size_t row, const size_t col
+  ) const;
   //** Alias for get_sprite_at().
-  std::optional<SpriteCoordinates> get_sprite_coordinates(const Entity::Id id,
-                                                          const size_t ani_state,
-                                                          const size_t idx) const;
+  std::optional<SpriteCoordinates> get_sprite_coordinates(
+      const Entity::Id id, const size_t ani_state, const size_t idx
+  ) const;
 
   //** Get a sprite given it's id in a Tiled map.
-  std::optional<SpriteCoordinates> get_sprite_with_tiled_id(const Entity::Id id,
-                                                            const size_t tiled_id) const;
+  std::optional<SpriteCoordinates> get_sprite_with_tiled_id(
+      const Entity::Id id, const size_t tiled_id
+  ) const;
 
   /**
      Load a spritesheet from an image file and extract sprites from it.
@@ -63,8 +65,9 @@ class SpritesheetsManager {
      - the file is of invalid/unsupported type
      - the `sprite_size` equal to or less than 0 or is bigger than the spritesheet
    */
-  std::optional<Entity::Id> load_spritesheet(const std::string &filename,
-                                             const sf::Vector2<size_t> sprite_size);
+  std::optional<Entity::Id> load_spritesheet(
+      const std::string &filename, const sf::Vector2<size_t> sprite_size
+  );
 
   /**
      Load a tileset made by the <a href="https://www.mapeditor.org">Tiled</a> tile map editor.
@@ -88,7 +91,8 @@ class SpritesheetsManager {
      `std::nullopt` if the `size` <= 0 or > than the spritesheet.
    */
   std::optional<std::vector<std::vector<SpriteCoordinates>>> split_spritesheet(
-      const Texture &ss, const sf::Vector2<size_t> size) const;
+      const Texture &ss, const sf::Vector2<size_t> size
+  ) const;
 
  protected:
   std::vector<Texture> m_spritesheets;
